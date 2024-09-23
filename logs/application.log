@@ -1,0 +1,121 @@
+2024-09-19 07:17:05,555 - INFO - Safe Browsing API initialized successfully
+2024-09-19 01:10:35,234 - INFO - Safe Browsing API initialized successfully
+2024-09-19 01:10:36,020 - INFO - Safe Browsing API initialized successfully
+2024-09-19 01:14:38,544 - INFO - Current folder set to: 423
+2024-09-19 01:14:45,169 - INFO - Manual deployment started by user.
+2024-09-19 01:15:35,744 - INFO - URL passed Safe Browsing check: https://msstoeranlyg6jff26708485.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 01:15:36,756 - INFO - Updated Keitaro flow to use new URL: https://msstoeranlyg6jff26708485.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 01:15:36,757 - INFO - Manual deployment completed successfully.
+2024-09-19 01:15:36,759 - INFO - Manual deployment started by user.
+2024-09-19 01:16:27,536 - INFO - URL passed Safe Browsing check: https://msstoera3pn3uc3426708536.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 01:16:28,523 - INFO - Updated Keitaro flow to use new URL: https://msstoera3pn3uc3426708536.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 01:16:28,524 - INFO - Manual deployment completed successfully.
+2024-09-19 01:16:56,955 - INFO - Deployment stopped by user.
+2024-09-19 03:02:07,431 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:19:53,864 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:19:54,679 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:20:00,289 - INFO - Manual deployment started by user.
+2024-09-19 07:20:51,984 - INFO - URL passed Safe Browsing check: https://msstoerame6vld4f26730400.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:20:52,970 - INFO - Updated Keitaro flow to use new URL: https://msstoerame6vld4f26730400.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:20:52,971 - INFO - Manual deployment completed successfully.
+2024-09-19 07:20:59,147 - INFO - Deployment stopped by user.
+2024-09-19 07:21:05,547 - INFO - Manual deployment started by user.
+2024-09-19 07:21:58,397 - INFO - URL passed Safe Browsing check: https://msstoera00lbhg9426730465.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:21:59,360 - INFO - Updated Keitaro flow to use new URL: https://msstoera00lbhg9426730465.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:21:59,361 - INFO - Manual deployment completed successfully.
+2024-09-19 07:25:04,460 - INFO - 2 minutes passed since last deployment.
+2024-09-19 07:25:57,410 - INFO - URL passed Safe Browsing check: https://msstoera6ozqo3yp26730704.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:25:58,391 - INFO - Updated Keitaro flow to use new URL: https://msstoera6ozqo3yp26730704.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:25:58,391 - INFO - Scheduled deployment completed successfully.
+2024-09-19 07:26:12,954 - ERROR - Unhandled exception: can't subtract offset-naive and offset-aware datetimes
+2024-09-19 07:26:12,956 - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/app/app.py", line 96, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/app.py", line 247, in home
+    time_remaining = next_deploy_time - datetime.now()
+TypeError: can't subtract offset-naive and offset-aware datetimes
+
+2024-09-19 07:26:14,297 - ERROR - Unhandled exception: can't subtract offset-naive and offset-aware datetimes
+2024-09-19 07:26:14,297 - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/app/app.py", line 96, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/app.py", line 247, in home
+    time_remaining = next_deploy_time - datetime.now()
+TypeError: can't subtract offset-naive and offset-aware datetimes
+
+2024-09-19 07:26:14,727 - ERROR - Unhandled exception: can't subtract offset-naive and offset-aware datetimes
+2024-09-19 07:26:14,727 - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/app/app.py", line 96, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/app.py", line 247, in home
+    time_remaining = next_deploy_time - datetime.now()
+TypeError: can't subtract offset-naive and offset-aware datetimes
+
+2024-09-19 07:26:14,979 - ERROR - Unhandled exception: can't subtract offset-naive and offset-aware datetimes
+2024-09-19 07:26:14,979 - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/app/app.py", line 96, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/app.py", line 247, in home
+    time_remaining = next_deploy_time - datetime.now()
+TypeError: can't subtract offset-naive and offset-aware datetimes
+
+2024-09-19 07:27:04,460 - INFO - 2 minutes passed since last deployment.
+2024-09-19 07:27:55,244 - INFO - URL passed Safe Browsing check: https://msstoerageiu8nyz26730824.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:27:56,242 - INFO - Updated Keitaro flow to use new URL: https://msstoerageiu8nyz26730824.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:27:56,243 - INFO - Scheduled deployment completed successfully.
+2024-09-19 07:29:58,160 - ERROR - Unhandled exception: can't subtract offset-naive and offset-aware datetimes
+2024-09-19 07:29:58,160 - ERROR - Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/app/app.py", line 96, in decorated_function
+    return f(*args, **kwargs)
+  File "/app/app.py", line 247, in home
+    time_remaining = next_deploy_time - datetime.now()
+TypeError: can't subtract offset-naive and offset-aware datetimes
+
+2024-09-19 07:31:04,460 - INFO - 2 minutes passed since last deployment.
+2024-09-19 07:31:55,044 - INFO - URL passed Safe Browsing check: https://msstoera0xkurl2826731064.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:31:56,033 - INFO - Updated Keitaro flow to use new URL: https://msstoera0xkurl2826731064.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:31:56,033 - INFO - Scheduled deployment completed successfully.
+2024-09-19 07:32:05,079 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:32:10,354 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:32:11,528 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:32:15,538 - INFO - Manual deployment started by user.
+2024-09-19 07:33:06,054 - INFO - URL passed Safe Browsing check: https://msstoera0g5ovc0u26731135.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:33:07,097 - INFO - Updated Keitaro flow to use new URL: https://msstoera0g5ovc0u26731135.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:33:07,098 - INFO - Manual deployment completed successfully.
+2024-09-19 07:36:11,543 - INFO - 2 minutes passed since last deployment.
+2024-09-19 07:37:04,194 - INFO - URL passed Safe Browsing check: https://msstoera5n8gkq3826731371.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:37:05,158 - INFO - Updated Keitaro flow to use new URL: https://msstoera5n8gkq3826731371.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:37:05,158 - INFO - Scheduled deployment completed successfully.
+2024-09-19 07:40:11,543 - INFO - 2 minutes passed since last deployment.
+2024-09-19 07:41:01,461 - INFO - URL passed Safe Browsing check: https://msstoerapehvgvop26731611.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:41:02,394 - INFO - Updated Keitaro flow to use new URL: https://msstoerapehvgvop26731611.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 07:41:02,394 - INFO - Scheduled deployment completed successfully.
+2024-09-19 07:41:42,040 - INFO - Deployment stopped by user.
+2024-09-19 07:47:23,246 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:47:24,097 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:47:46,731 - INFO - Safe Browsing API initialized successfully
+2024-09-19 07:47:47,732 - INFO - Safe Browsing API initialized successfully
+2024-09-19 18:23:09,472 - INFO - Safe Browsing API initialized successfully
+2024-09-19 18:23:10,277 - INFO - Safe Browsing API initialized successfully
+2024-09-19 18:23:24,958 - INFO - Safe Browsing API initialized successfully
+2024-09-19 18:23:25,702 - INFO - Safe Browsing API initialized successfully

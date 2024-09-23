@@ -1,0 +1,30 @@
+2024-09-16 16:10:57,609 - INFO - Starting deployment of new URL
+2024-09-16 16:10:57,639 - ERROR - Failed to deploy new URL
+2024-09-16 16:13:04,254 - INFO - Starting deployment of new URL
+2024-09-16 16:13:07,139 - ERROR - Failed to deploy new URL
+2024-09-16 16:14:51,181 - INFO - Starting deployment of new URL
+2024-09-16 16:15:27,026 - INFO - Deployed new URL: https://storageb2812efc83.blob.core.windows.net/$web/index.html?ph0n=1-888-734-0465
+2024-09-16 16:27:09,134 - INFO - Starting deployment of new URL
+2024-09-16 16:27:48,989 - INFO - Deployed new URL: https://storage667d6a78cd.blob.core.windows.net/$web/index.html?ph0n=1-888-734-0465
+2024-09-16 16:29:25,185 - INFO - Starting deployment of new URL
+2024-09-16 16:30:04,653 - INFO - Deployed new URL: https://storage4ef48be94c.blob.core.windows.net/$web/index.html?ph0n=1-888-734-0465
+2024-09-19 03:41:49,681 - INFO - Starting deployment of new URL
+2024-09-19 03:41:49,738 - ERROR - Failed to deploy new URL
+Traceback (most recent call last):
+  File "E:\New folder\deployment_dashboard\deploy.py", line 22, in deploy_new_url
+    website_url = deploy_to_azure()
+                  ^^^^^^^^^^^^^^^^^
+  File "E:\New folder\deployment_dashboard\az.py", line 138, in main
+    local_folder_path = state.get("current_folder", config["local_folder_path"])
+                                                    ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'local_folder_path'
+2024-09-19 03:43:04,261 - INFO - Starting deployment of new URL
+2024-09-19 03:43:44,793 - INFO - Deployed new URL: https://msstoera10r816m826692184.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 03:44:16,942 - INFO - Starting deployment of new URL
+2024-09-19 03:45:47,099 - INFO - Deployed new URL: https://msstoera9qycg2m126692256.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 05:17:26,588 - INFO - Starting deployment of new URL
+2024-09-19 05:18:17,131 - INFO - Deployed new URL: https://msstoera5ujqcqqe26697846.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 05:46:52,354 - INFO - Starting deployment of new URL
+2024-09-19 05:47:43,811 - INFO - Deployed new URL: https://msstoeraupjp3nlp26699612.blob.core.windows.net/$web/index.html?ph0n=4259546135
+2024-09-19 05:54:45,054 - INFO - Starting deployment of new URL
+2024-09-19 05:55:36,048 - INFO - Deployed new URL: https://msstoerav06o4swt26700085.blob.core.windows.net/$web/index.html?ph0n=4259546135

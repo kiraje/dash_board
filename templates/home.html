@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}Deployment Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- Status Panel -->
+  <div class="col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Current Status</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-circle me-2"></i>Status</span>
+            {% if run_status %}
+              <span class="badge bg-success rounded-pill">Running</span>
+            {% else %}
+              <span class="badge bg-danger rounded-pill">Stopped</span>
+            {% endif %}
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-clock me-2"></i>Last Deployment</span>
+            <span>{{ last_deploy_time }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-hourglass-half me-2"></i>Next Deployment</span>
+            <span id="countdown">
+              {% if time_remaining %}
+                {{ time_remaining }}
+              {% else %}
+                N/A
+              {% endif %}
+            </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-redo me-2"></i>Redeploy Interval</span>
+            <span>{{ max_deploy_time_minutes }} minutes</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-stopwatch me-2"></i>Check Interval</span>
+            <span>{{ deploy_interval_seconds }} seconds</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Control Panel -->
+  <div class="col-lg-8 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Control Panel</h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <h6 class="card-subtitle mb-2 text-muted">Deployment Control</h6>
+            <div class="d-grid gap-2 d-md-block">
+              <form action="{{ url_for('start') }}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-success" {% if run_status %}disabled{% endif %} data-bs-toggle="tooltip" title="Start the deployment process">
+                  <i class="fas fa-play me-2"></i>Start Deployment
+                </button>
+              </form>
+              <form action="{{ url_for('stop') }}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger" {% if not run_status %}disabled{% endif %} data-bs-toggle="tooltip" title="Stop the deployment process">
+                  <i class="fas fa-stop me-2"></i>Stop Deployment
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h6 class="card-subtitle mb-2 text-muted">Set Phone Number</h6>
+            <form action="{{ url_for('set_phone_number') }}" method="post">
+              <div class="input-group">
+                <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{ phone_number }}" required placeholder="Enter phone number">
+                <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" title="Set the phone number for deployment">
+                  <i class="fas fa-save me-2"></i>Set
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <h6 class="card-subtitle mb-2 text-muted">Set Current Folder</h6>
+            <form action="{{ url_for('set_current_folder') }}" method="post">
+              <div class="input-group">
+                <select class="form-select" name="folder_name" id="folder_name">
+                  {% for folder in folders %}
+                    <option value="{{ folder }}" {% if folder == current_folder_name %}selected{% endif %}>{{ folder }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" title="Set the current working folder">
+                  <i class="fas fa-folder me-2"></i>Set
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <h6 class="card-subtitle mb-2 text-muted">Set Redeploy Interval</h6>
+            <form action="{{ url_for('set_redeploy_interval') }}" method="post">
+              <div class="input-group mb-2">
+                <input type="number" class="form-control" name="max_deploy_time_minutes" id="max_deploy_time_minutes" value="{{ max_deploy_time_minutes }}" min="1" required placeholder="Minutes">
+                <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" title="Set the interval between deployments">
+                  <i class="fas fa-clock me-2"></i>Set
+                </button>
+              </div>
+              <div class="input-group">
+                <input type="number" class="form-control" name="deploy_interval_seconds" id="deploy_interval_seconds" value="{{ deploy_interval_seconds }}" min="10" required placeholder="Seconds">
+                <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" title="Set the interval for checking deployment status">
+                  <i class="fas fa-stopwatch me-2"></i>Set
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12">
+            <h6 class="card-subtitle mb-2 text-muted">Set Keitaro IDs</h6>
+            <form action="{{ url_for('set_keitaro_ids') }}" method="post" id="keitaroForm">
+              <div class="row g-2">
+                <div class="col-md-5">
+                  <select class="form-select" name="keitaro_campaign_id" id="keitaro_campaign_id" required>
+                    <option value="">Select Campaign</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <select class="form-select" name="keitaro_stream_id" id="keitaro_stream_id" required>
+                    <option value="">Select Stream</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-primary w-100" data-bs-toggle="tooltip" title="Set Keitaro Campaign and Stream IDs">
+                    <i class="fas fa-save me-2"></i>Set
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- New Log Management Section -->
+          <div class="col-12">
+            <h6 class="card-subtitle mb-2 text-muted">Log Management</h6>
+            <div class="row g-2">
+              <div class="col-md-6">
+                <form action="{{ url_for('log_management') }}" method="post">
+                  <input type="hidden" name="action" value="delete_logs">
+                  <button type="submit" class="btn btn-warning w-100" data-bs-toggle="tooltip" title="Delete old log files">
+                    <i class="fas fa-trash-alt me-2"></i>Delete Old Logs
+                  </button>
+                </form>
+              </div>
+              <div class="col-md-6">
+                <form action="{{ url_for('log_management') }}" method="post">
+                  <div class="input-group">
+                    <input type="number" class="form-control" name="log_retention_days" id="log_retention_days" value="{{ log_retention_days }}" min="1" required placeholder="Days">
+                    <input type="hidden" name="action" value="set_retention">
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" title="Set log retention period">
+                      <i class="fas fa-calendar-alt me-2"></i>Set Retention
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="mt-2">
+              <a href="{{ url_for('log_management') }}" class="btn btn-secondary w-100">
+                <i class="fas fa-cog me-2"></i>Log Management Page
+              </a>
+            </div>
+          </div>
+          <!-- Last Deployment URL (Moved to Control Panel) -->
+          <div class="col-12">
+            <h6 class="card-subtitle mb-2 text-muted">Last Deployment URL</h6>
+            <div class="input-group">
+              <input type="text" class="form-control" value="{{ current_url }}" id="lastDeploymentUrl" readonly>
+              <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('lastDeploymentUrl')" data-bs-toggle="tooltip" title="Copy URL to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+              <a href="{{ current_url }}" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Open URL in new tab">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Logs -->
+<div class="row">
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="mb-0 d-flex justify-content-between align-items-center">
+          <span><i class="fas fa-list-alt me-2"></i>Recent Logs</span>
+          <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#recentLogs" aria-expanded="true" aria-controls="recentLogs">
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </h5>
+      </div>
+      <div id="recentLogs" class="collapse show">
+        <div class="card-body">
+          <pre class="bg-light p-3" style="height: 200px; overflow-y: scroll;">
+{% for line in recent_logs %}
+{{ line }}
+{% endfor %}
+          </pre>
+          <a href="{{ url_for('view_logs') }}" class="btn btn-secondary mt-2">
+            <i class="fas fa-external-link-alt me-2"></i>View Full Logs
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Initialize tooltips
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+
+{% if time_remaining %}
+  // Countdown Script
+  var timeRemaining = {{ time_remaining.total_seconds()|int }};
+  var countdownElement = document.getElementById('countdown');
+
+  function updateCountdown() {
+    var minutes = Math.floor(timeRemaining / 60);
+    var seconds = timeRemaining % 60;
+
+    if (timeRemaining <= 0) {
+      countdownElement.innerHTML = 'Deploying soon...';
+      clearInterval(countdownInterval);
+    } else {
+      countdownElement.innerHTML = minutes + 'm ' + (seconds < 10 ? '0' + seconds : seconds) + 's';
+    }
+    timeRemaining--;
+  }
+
+  var countdownInterval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+{% endif %}
+
+  // Keitaro Dropdown Script
+  $(document).ready(function() {
+    const campaignSelect = $('#keitaro_campaign_id');
+    const streamSelect = $('#keitaro_stream_id');
+
+    // Fetch campaigns and streams
+    $.getJSON('{{ url_for("get_campaigns_and_streams") }}', function(data) {
+        // Populate campaign dropdown
+        $.each(data, function(index, campaign) {
+            campaignSelect.append($('<option>', {
+                value: campaign.id,
+                text: campaign.name + ' (ID: ' + campaign.id + ')'
+            }));
+        });
+
+        // Set the current campaign if it exists
+        if ('{{ keitaro_campaign_id }}') {
+            campaignSelect.val('{{ keitaro_campaign_id }}');
+            updateStreams(data, '{{ keitaro_campaign_id }}');
+        }
+    });
+
+    // Update streams when campaign changes
+    campaignSelect.change(function() {
+        $.getJSON('{{ url_for("get_campaigns_and_streams") }}', function(data) {
+            updateStreams(data, campaignSelect.val());
+        });
+    });
+
+    function updateStreams(data, campaignId) {
+        // Clear existing options
+        streamSelect.empty().append($('<option>', {
+            value: '',
+            text: 'Select Stream'
+        }));
+
+        // Find the selected campaign
+        const campaign = data.find(c => c.id == campaignId);
+        if (campaign) {
+            // Populate stream dropdown
+            $.each(campaign.streams, function(index, stream) {
+                streamSelect.append($('<option>', {
+                    value: stream.id,
+                    text: stream.name + ' (ID: ' + stream.id + ')'
+                }));
+            });
+
+            // Set the current stream if it exists
+            if ('{{ keitaro_stream_id }}') {
+                streamSelect.val('{{ keitaro_stream_id }}');
+            }
+        }
+    }
+  });
+
+  // Copy to clipboard function
+  function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    
+    var tooltip = bootstrap.Tooltip.getInstance(document.querySelector('[data-bs-toggle="tooltip"][title="Copy URL to clipboard"]'));
+    tooltip.setContent({ '.tooltip-inner': 'Copied!' });
+    
+    setTimeout(function() {
+      tooltip.setContent({ '.tooltip-inner': 'Copy URL to clipboard' });
+    }, 2000);
+  }
+</script>
+{% endblock %}

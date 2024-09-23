@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Log Management{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Log Management</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Set Log Retention Period</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('log_management') }}" method="post">
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="log_retention_days" id="log_retention_days" value="{{ log_retention_days }}" min="1" required placeholder="Days">
+                            <input type="hidden" name="action" value="set_retention">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calendar-alt me-2"></i>Set Retention
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Delete Old Logs</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('log_management') }}" method="post">
+                        <input type="hidden" name="action" value="delete_logs">
+                        <button type="submit" class="btn btn-warning w-100">
+                            <i class="fas fa-trash-alt me-2"></i>Delete Old Logs
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Current Log Files</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Size</th>
+                        <th>Last Modified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log_file in log_files %}
+                    <tr>
+                        <td>{{ log_file.name }}</td>
+                        <td>{{ log_file.size }}</td>
+                        <td>{{ log_file.last_modified }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

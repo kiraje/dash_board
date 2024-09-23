@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Folders{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Available Folders</h2>
+<ul class="list-group">
+  {% for folder in folders %}
+    <li class="list-group-item">{{ folder }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

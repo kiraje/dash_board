@@ -1,0 +1,13 @@
+{
+    "resource_group": "myResourceGroup",
+    "location": "eastus",
+    "base_repo_directory": "/mnt/nas",
+    "local_folder_path": "/mnt/nas",
+    "subscription_id": "59ad2524-418b-4761-a5f1-5e7d076fbab1",
+    "storage_account_name": "msstoerapehvgvop26731611",
+    "telegram_api_key": "7057761545:AAHO1bITvTyRw_mdoqqbNq-i1UA0zRfC4rU",
+    "adspect_api_key": "lbZ-DJFC4kdnMywDeXCyzYTdT49as0Sh",
+    "safe_browsing_api_key": "AIzaSyARPoo6Se5sY7tDjMAn8yFNY_ZhKIe03g4",
+    "stream_id": "a8c6e8c1-9e69-475e-bf60-ff71beedbe85",
+    "keitaro_api_key": "e07cbd1ca871fed88a4216a579c73577"
+}

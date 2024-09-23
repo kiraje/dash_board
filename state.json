@@ -1,0 +1,9 @@
+{
+    "phone_number": "4259546135",
+    "current_folder": "/mnt/nas/423",
+    "keitaro_campaign_id": "4",
+    "keitaro_stream_id": "10",
+    "log_retention_days": 1,
+    "max_deploy_time_minutes": 2,
+    "deploy_interval_seconds": 120
+}

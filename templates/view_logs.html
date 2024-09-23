@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}View Logs{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Application Logs</h2>
+<div class="card">
+  <div class="card-body">
+    <pre class="bg-light p-3" style="height: 500px; overflow-y: scroll;">
+{% for line in log_lines %}
+{{ line }}
+{% endfor %}
+    </pre>
+  </div>
+</div>
+{% endblock %}

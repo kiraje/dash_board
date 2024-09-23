@@ -1,0 +1,9 @@
+/* Custom styles */
+
+body {
+    padding-top: 56px; /* Adjust if navbar height changes */
+}
+
+.card {
+    margin-bottom: 20px;
+}

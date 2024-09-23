@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Configuration Settings</h1>
+
+<h2>Azure Configuration</h2>
+<form method="POST" action="{{ url_for('configs') }}">
+    <input type="hidden" name="config_type" value="azure">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in azure_config.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>
+                    <input type="text" name="{{ key }}" value="{{ value }}" class="form-control">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Update Azure Config</button>
+</form>
+
+<h2>Service Principal Configuration</h2>
+<form method="POST" action="{{ url_for('configs') }}">
+    <input type="hidden" name="config_type" value="service_principal">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in service_principal.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>
+                    {% if key == 'client_secret' %}
+                        <input type="password" name="{{ key }}" value="{{ value }}" class="form-control">
+                    {% else %}
+                        <input type="text" name="{{ key }}" value="{{ value }}" class="form-control">
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Update Service Principal Config</button>
+</form>
+{% endblock %}
